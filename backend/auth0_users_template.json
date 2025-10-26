@@ -1,0 +1,40 @@
+{
+  "roles": [
+    {
+      "name": "Barista",
+      "description": "Can view drink details",
+      "permissions": [
+        "get:drinks",
+        "get:drinks-detail"
+      ]
+    },
+    {
+      "name": "Manager",
+      "description": "Can perform all actions",
+      "permissions": [
+        "get:drinks",
+        "get:drinks-detail",
+        "post:drinks",
+        "patch:drinks",
+        "delete:drinks"
+      ]
+    }
+  ],
+  "users": [
+    {
+      "email": "barista@coffee-shop.com",
+      "password": "SecurePass123!",
+      "connection": "Username-Password-Authentication",
+      "roles": ["Barista"],
+      "verify_email": false
+    },
+    {
+      "email": "manager@coffee-shop.com",
+      "password": "SecurePass123!",
+      "connection": "Username-Password-Authentication",
+      "roles": ["Manager"],
+      "verify_email": false
+    }
+  ]
+}
+

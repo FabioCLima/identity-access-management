@@ -12,7 +12,7 @@ This guide will help you:
 ### 1.1 Create Auth0 Account
 1. Go to https://auth0.com and sign up
 2. Create a new tenant
-3. Note your domain: `your-tenant.auth0.com`
+3. Note your domain: dev-huk2wemon6z8ehay
 
 ### 1.2 Create an API
 1. In Auth0 Dashboard, go to **Applications > APIs**
@@ -56,6 +56,61 @@ Go to **User Management > Roles** and create:
   - `delete:drinks`
 
 ### 1.6 Create Users and Assign Roles
+
+You have two options to create users and roles:
+
+#### Option A: Using the Management API (Automated - Recommended)
+
+**Using the setup script with JSON configuration:**
+
+1. Update the configuration file `backend/auth0_users_template.json`:
+   ```json
+   {
+     "roles": [...],
+     "users": [
+       {
+         "email": "barista@test.com",
+         "password": "SecurePassword123!",
+         "connection": "Username-Password-Authentication",
+         "roles": ["Barista"]
+       },
+       {
+         "email": "manager@test.com",
+         "password": "SecurePassword123!",
+         "connection": "Username-Password-Authentication",
+         "roles": ["Manager"]
+       }
+     ]
+   }
+   ```
+
+2. Get your Management API credentials:
+   - Go to **Applications** in Auth0 Dashboard
+   - Create a Machine to Machine Application
+   - Authorize it for the Management API
+   - Note down the Client ID and Client Secret
+
+3. Run the setup script:
+   ```bash
+   cd backend
+   source .venv/bin/activate
+   pip install auth0-python  # if not already installed
+   
+   python setup_auth0.py \
+     --domain your-tenant.auth0.com \
+     --client-id YOUR_CLIENT_ID \
+     --client-secret YOUR_CLIENT_SECRET \
+     --config auth0_users_template.json
+   ```
+
+4. The script will automatically:
+   - Create all roles with permissions
+   - Create all users
+   - Assign roles to users
+   - Print success messages
+
+#### Option B: Using Auth0 Dashboard (Manual)
+
 1. Go to **User Management > Users**
 2. Click **"Create User"**
 3. Create two test users:
