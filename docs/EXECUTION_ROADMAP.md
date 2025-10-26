@@ -93,8 +93,10 @@ EOF
 
 #### 2.4 Inicializar Banco de Dados (Primeira execução)
 ```bash
-# Editar backend/src/api.py
-# Descomente a linha db_drop_and_create_all() por uma vez
+cd backend/src
+export FLASK_APP=api.py
+
+# Descomente a linha db_drop_and_create_all() em api.py por uma vez
 # Depois de criar o banco, comente novamente
 ```
 
@@ -103,20 +105,11 @@ EOF
 ### Fase 3: Executar Backend (5 minutos)
 
 #### 3.1 Iniciar Servidor Flask
-
-**Opção 1: Usando o script automático (RECOMENDADO)**
 ```bash
-cd backend
-./start_server.sh
-```
-
-**Opção 2: Manual**
-```bash
-cd backend
-source .venv/bin/activate
-export FLASK_APP=src.api
-export FLASK_ENV=development
-flask run --host=0.0.0.0 --reload
+cd backend/src
+source ../.venv/bin/activate
+export FLASK_APP=api.py
+flask run --reload
 ```
 
 **Verificar:** Servidor deve estar em http://localhost:5000
