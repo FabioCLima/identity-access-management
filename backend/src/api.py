@@ -62,12 +62,21 @@ def get_drinks():
             ]
         }
     """
-    # TODO: Implement this endpoint
-    # It should be a public endpoint
-    # It should contain only the drink.short() data representation
-    # Returns status code 200 and json {"success": True, "drinks": drinks}
-    # or appropriate status code indicating reason for failure
-    abort(501)  # Not Implemented
+    try:
+        # Query all drinks from database
+        drinks = Drink.query.all()
+        
+        # Return short form representation
+        drinks_list = [drink.short() for drink in drinks]
+        
+        return jsonify({
+            "success": True,
+            "drinks": drinks_list
+        }), 200
+    
+    except Exception as e:
+        print(f"Error getting drinks: {str(e)}")
+        abort(500)
 
 
 @app.route('/drinks-detail', methods=['GET'])
@@ -96,10 +105,21 @@ def get_drinks_detail(payload):
             ]
         }
     """
-    # TODO: Implement this endpoint
-    # It should require the 'get:drinks-detail' permission
-    # It should contain the drink.long() data representation
-    abort(501)  # Not Implemented
+    try:
+        # Query all drinks from database
+        drinks = Drink.query.all()
+        
+        # Return long form representation
+        drinks_list = [drink.long() for drink in drinks]
+        
+        return jsonify({
+            "success": True,
+            "drinks": drinks_list
+        }), 200
+    
+    except Exception as e:
+        print(f"Error getting drinks detail: {str(e)}")
+        abort(500)
 
 
 @app.route('/drinks', methods=['POST'])
@@ -129,11 +149,51 @@ def create_drink(payload):
         Request: {"title": "Latte", "recipe": [{"name": "coffee", "color": "brown", "parts": 1}]}
         Response: {"success": True, "drinks": [{"id": 2, "title": "Latte", ...}]}
     """
-    # TODO: Implement this endpoint
-    # It should create a new row in the drinks table
-    # It should require the 'post:drinks' permission
-    # It should contain the drink.long() data representation
-    abort(501)  # Not Implemented
+    try:
+        # Get request body
+        body = request.get_json()
+        
+        # Validate required fields
+        if not body:
+            abort(400)
+        
+        title = body.get('title', None)
+        recipe = body.get('recipe', None)
+        
+        # Validate that both fields are provided
+        if not title or not recipe:
+            abort(400)
+        
+        # Validate recipe is a list
+        if not isinstance(recipe, list):
+            abort(422)
+        
+        # Validate each ingredient in recipe
+        for ingredient in recipe:
+            if not all(key in ingredient for key in ['name', 'color', 'parts']):
+                abort(422)
+        
+        # Create new drink
+        new_drink = Drink(
+            title=title,
+            recipe=json.dumps(recipe)
+        )
+        
+        # Insert drink into database
+        new_drink.insert()
+        
+        # Return the created drink in long form
+        return jsonify({
+            "success": True,
+            "drinks": [new_drink.long()]
+        }), 200
+    
+    except exc.IntegrityError:
+        # Handle duplicate title
+        abort(422)
+    except Exception as e:
+        print(f"Error creating drink: {str(e)}")
+        abort(422)
 
 
 @app.route('/drinks/<int:drink_id>', methods=['PATCH'])
@@ -167,11 +227,55 @@ def update_drink(payload, drink_id):
         Request: {"title": "Updated Drink"}
         Response: {"success": True, "drinks": [updated_drink]}
     """
-    # TODO: Implement this endpoint
-    # It should update the corresponding row for <id>
-    # It should respond with a 404 error if <id> is not found
-    # It should require the 'patch:drinks' permission
-    abort(501)  # Not Implemented
+    try:
+        # Get the drink by ID
+        drink = Drink.query.filter(Drink.id == drink_id).one_or_none()
+        
+        # Return 404 if drink not found
+        if drink is None:
+            abort(404)
+        
+        # Get request body
+        body = request.get_json()
+        
+        # Validate request body
+        if not body:
+            abort(400)
+        
+        # Update title if provided
+        if 'title' in body:
+            drink.title = body.get('title')
+        
+        # Update recipe if provided
+        if 'recipe' in body:
+            recipe = body.get('recipe')
+            
+            # Validate recipe is a list
+            if not isinstance(recipe, list):
+                abort(422)
+            
+            # Validate each ingredient in recipe
+            for ingredient in recipe:
+                if not all(key in ingredient for key in ['name', 'color', 'parts']):
+                    abort(422)
+            
+            drink.recipe = json.dumps(recipe)
+        
+        # Update the drink in database
+        drink.update()
+        
+        # Return the updated drink in long form
+        return jsonify({
+            "success": True,
+            "drinks": [drink.long()]
+        }), 200
+    
+    except exc.IntegrityError:
+        # Handle duplicate title
+        abort(422)
+    except Exception as e:
+        print(f"Error updating drink: {str(e)}")
+        abort(422)
 
 
 @app.route('/drinks/<int:drink_id>', methods=['DELETE'])
@@ -198,11 +302,26 @@ def delete_drink(payload, drink_id):
         DELETE /drinks/1
         Response: {"success": True, "delete": 1}
     """
-    # TODO: Implement this endpoint
-    # It should delete the corresponding row for <id>
-    # It should respond with a 404 error if <id> is not found
-    # It should require the 'delete:drinks' permission
-    abort(501)  # Not Implemented
+    try:
+        # Get the drink by ID
+        drink = Drink.query.filter(Drink.id == drink_id).one_or_none()
+        
+        # Return 404 if drink not found
+        if drink is None:
+            abort(404)
+        
+        # Delete the drink from database
+        drink.delete()
+        
+        # Return success response
+        return jsonify({
+            "success": True,
+            "delete": drink_id
+        }), 200
+    
+    except Exception as e:
+        print(f"Error deleting drink: {str(e)}")
+        abort(500)
 
 
 # Error Handling
