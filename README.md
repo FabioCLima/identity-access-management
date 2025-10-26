@@ -15,16 +15,22 @@ You have been called on to demonstrate your newly learned skills to create a ful
 
 ```
 coffee-shop/
-├── backend/          # Flask backend API
+├── backend/          # Flask backend API (implementation)
 │   ├── src/          # Application source code
 │   ├── requirements.txt
 │   └── README.md
 ├── frontend/         # Ionic frontend application
 │   ├── src/          # Application source code
 │   └── README.md
+├── starter-code/     # Original starter code for reference
+│   ├── backend/      # Original backend starter
+│   └── frontend/     # Original frontend starter
 ├── docs/             # Comprehensive documentation
 │   ├── backend/      # Backend-specific docs
 │   ├── frontend/      # Frontend-specific docs
+│   ├── lessons/      # Course lesson materials
+│   │   ├── lesson-1-Foundation/
+│   │   └── lesson-2-Identity-and-Authentication/
 │   └── *.md          # Project documentation
 └── README.md         # This file
 ```
