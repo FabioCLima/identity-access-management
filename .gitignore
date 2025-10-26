@@ -23,6 +23,11 @@ instance/
 # Environment variables
 .env
 .env.local
+.env.development
+.env.production
+
+# Allow template files
+!.env.example
 
 # IDE
 .vscode/

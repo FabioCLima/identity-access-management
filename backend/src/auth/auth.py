@@ -1,13 +1,27 @@
+"""
+Authentication module for Coffee Shop API.
+
+This module provides authentication and authorization functionality using Auth0 JWT tokens.
+It includes decorators for protecting API endpoints and validating user permissions.
+
+Environment Variables Required:
+    AUTH0_DOMAIN: Your Auth0 domain (e.g., 'udacity-fsnd.auth0.com')
+    AUTH0_ALGORITHM: JWT algorithm (default: 'RS256')
+    AUTH0_API_AUDIENCE: Your Auth0 API audience identifier
+"""
+
 import json
-from flask import request, _request_ctx_stack
+import os
+from flask import request
 from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
 
 
-AUTH0_DOMAIN = 'udacity-fsnd.auth0.com'
-ALGORITHMS = ['RS256']
-API_AUDIENCE = 'dev'
+# Read Auth0 configuration from environment variables
+AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN', 'udacity-fsnd.auth0.com')
+ALGORITHMS = os.environ.get('AUTH0_ALGORITHM', 'RS256').split(',')
+API_AUDIENCE = os.environ.get('AUTH0_API_AUDIENCE', 'dev')
 
 ## AuthError Exception
 '''

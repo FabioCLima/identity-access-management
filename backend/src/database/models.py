@@ -1,128 +1,160 @@
+"""
+Database models for Coffee Shop API.
+
+This module provides database configuration and models using SQLAlchemy.
+It includes the Drink model and database initialization functions.
+"""
+
 import os
 from sqlalchemy import Column, String, Integer
 from flask_sqlalchemy import SQLAlchemy
 import json
 
-database_filename = "database.db"
-project_dir = os.path.dirname(os.path.abspath(__file__))
-database_path = "sqlite:///{}".format(os.path.join(project_dir, database_filename))
+
+# Database configuration
+DATABASE_FILENAME = "database.db"
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATABASE_PATH = f"sqlite:///{os.path.join(PROJECT_DIR, DATABASE_FILENAME)}"
 
 db = SQLAlchemy()
 
-'''
-setup_db(app)
-    binds a flask application and a SQLAlchemy service
-'''
-
 
 def setup_db(app):
-    app.config["SQLALCHEMY_DATABASE_URI"] = database_path
+    """
+    Configure and initialize database for Flask application.
+
+    Args:
+        app: Flask application instance
+
+    This function binds the Flask application to the SQLAlchemy service
+    and sets up the database connection.
+    """
+    app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_PATH
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
 
 
-'''
-db_drop_and_create_all()
-    drops the database tables and starts fresh
-    can be used to initialize a clean database
-    !!NOTE you can change the database_filename variable to have multiple verisons of a database
-'''
-
-
 def db_drop_and_create_all():
+    """
+    Drop all database tables and start fresh.
+
+    WARNING: This will delete all existing data!
+
+    Can be used to initialize a clean database.
+    Adds one demo row for testing.
+    Note: You can change the DATABASE_FILENAME variable to have multiple
+    database versions.
+    """
     db.drop_all()
     db.create_all()
-    # add one demo row which is helping in POSTMAN test
+    # Add one demo row for testing
     drink = Drink(
         title='water',
         recipe='[{"name": "water", "color": "blue", "parts": 1}]'
     )
-
-
     drink.insert()
-# ROUTES
-
-'''
-Drink
-a persistent drink entity, extends the base SQLAlchemy Model
-'''
 
 
 class Drink(db.Model):
+    """
+    Drink model representing a coffee shop beverage.
+
+    Attributes:
+        id: Auto-incrementing unique primary key
+        title: String title (max 80 chars, must be unique)
+        recipe: JSON string containing ingredient list
+                Format: [{'color': str, 'name': str, 'parts': int}]
+    """
+
     # Autoincrementing, unique primary key
     id = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
-    # String Title
+    # String title
     title = Column(String(80), unique=True)
-    # the ingredients blob - this stores a lazy json blob
-    # the required datatype is [{'color': string, 'name':string, 'parts':number}]
+    # Recipe ingredients stored as JSON string
+    # Format: [{'color': string, 'name': string, 'parts': number}]
     recipe = Column(String(180), nullable=False)
 
-    '''
-    short()
-        short form representation of the Drink model
-    '''
-
     def short(self):
+        """
+        Return short form representation of the Drink model.
+
+        Returns:
+            dict: Contains id, title, and simplified recipe
+                  with color and parts only
+
+        Example:
+            {'id': 1, 'title': 'Coffee', 'recipe': [{'color': 'brown', 'parts': 1}]}
+        """
         print(json.loads(self.recipe))
-        short_recipe = [{'color': r['color'], 'parts': r['parts']} for r in json.loads(self.recipe)]
+        short_recipe = [
+            {'color': r['color'], 'parts': r['parts']}
+            for r in json.loads(self.recipe)
+        ]
         return {
             'id': self.id,
             'title': self.title,
             'recipe': short_recipe
         }
 
-    '''
-    long()
-        long form representation of the Drink model
-    '''
-
     def long(self):
+        """
+        Return long form representation of the Drink model.
+
+        Returns:
+            dict: Contains id, title, and full recipe
+                  with color, name, and parts
+
+        Example:
+            {'id': 1, 'title': 'Coffee', 'recipe': [{'color': 'brown', 'name': 'coffee', 'parts': 1}]}
+        """
         return {
             'id': self.id,
             'title': self.title,
             'recipe': json.loads(self.recipe)
         }
 
-    '''
-    insert()
-        inserts a new model into a database
-        the model must have a unique name
-        the model must have a unique id or null id
-        EXAMPLE
-            drink = Drink(title=req_title, recipe=req_recipe)
-            drink.insert()
-    '''
-
     def insert(self):
+        """
+        Insert a new drink into the database.
+
+        The drink must have a unique title.
+        The drink must have a unique id or null id.
+
+        Example:
+            drink = Drink(title='Coffee', recipe='[{"name": "coffee", "color": "brown", "parts": 1}]')
+            drink.insert()
+        """
         db.session.add(self)
         db.session.commit()
 
-    '''
-    delete()
-        deletes a new model into a database
-        the model must exist in the database
-        EXAMPLE
-            drink = Drink(title=req_title, recipe=req_recipe)
-            drink.delete()
-    '''
-
     def delete(self):
+        """
+        Delete this drink from the database.
+
+        The drink must exist in the database.
+
+        Example:
+            drink = Drink.query.filter(Drink.id == drink_id).one_or_none()
+            drink.delete()
+        """
         db.session.delete(self)
         db.session.commit()
 
-    '''
-    update()
-        updates a new model into a database
-        the model must exist in the database
-        EXAMPLE
-            drink = Drink.query.filter(Drink.id == id).one_or_none()
-            drink.title = 'Black Coffee'
-            drink.update()
-    '''
-
     def update(self):
+        """
+        Update this drink in the database.
+
+        The drink must exist in the database.
+
+        Example:
+            drink = Drink.query.filter(Drink.id == drink_id).one_or_none()
+            drink.title = 'Black Coffee'
+            drink.recipe = 'updated_recipe'
+            drink.update()
+        """
         db.session.commit()
 
     def __repr__(self):
+        """Return string representation of the drink."""
         return json.dumps(self.short())

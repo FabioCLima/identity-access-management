@@ -36,6 +36,27 @@ uv pip install -r requirements.txt
 
 This will install all of the required packages we selected within the `requirements.txt` file.
 
+#### Environment Variables Configuration
+
+Create a `.env` file in the `backend` directory to store sensitive configuration:
+
+```bash
+cd backend
+cat > .env << EOF
+# Auth0 Configuration
+# Get these values from https://manage.auth0.com
+AUTH0_DOMAIN=udacity-fsnd.auth0.com
+AUTH0_ALGORITHM=RS256
+AUTH0_API_AUDIENCE=dev
+
+# Flask Configuration (Optional)
+FLASK_ENV=development
+FLASK_DEBUG=True
+EOF
+```
+
+**Important:** The `.env` file is already included in `.gitignore` to protect your secrets. Never commit actual credentials to version control.
+
 #### Alternative: Using PIP
 
 If you prefer using pip, you can still use traditional pip installation:
