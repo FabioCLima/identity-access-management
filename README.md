@@ -16,9 +16,47 @@ You have been called on to demonstrate your newly learned skills to create a ful
 ```
 coffee-shop/
 ├── backend/          # Flask backend API
+│   ├── src/          # Application source code
+│   ├── requirements.txt
+│   └── README.md
 ├── frontend/         # Ionic frontend application
+│   ├── src/          # Application source code
+│   └── README.md
+├── docs/             # Comprehensive documentation
+│   ├── backend/      # Backend-specific docs
+│   ├── frontend/      # Frontend-specific docs
+│   └── *.md          # Project documentation
 └── README.md         # This file
 ```
+
+## 📚 Documentation
+
+All documentation is located in the `docs/` directory:
+
+### Quick Start
+- **[EXECUTION_ROADMAP.md](docs/EXECUTION_ROADMAP.md)** - Step-by-step execution guide
+- **[QUICKSTART.md](docs/QUICKSTART.md)** - Quick setup instructions
+
+### Project Overview
+- **[PROJECT_SUMMARY.md](docs/PROJECT_SUMMARY.md)** - Complete project overview
+- **[PROJECT_REQUIREMENTS.md](docs/PROJECT_REQUIREMENTS.md)** - Requirements checklist
+
+### Backend Documentation
+- **[AUTH0_SETUP.md](docs/backend/AUTH0_SETUP.md)** - Auth0 configuration guide
+- **[TESTING_GUIDE.md](docs/backend/TESTING_GUIDE.md)** - Testing instructions
+- **[POSTMAN_SETUP_SUMMARY.md](docs/backend/POSTMAN_SETUP_SUMMARY.md)** - Postman configuration
+- **[AUTH0_MFA_SETUP.md](docs/backend/AUTH0_MFA_SETUP.md)** - Multi-factor auth setup
+- **[RBAC_ENHANCEMENT.md](docs/backend/RBAC_ENHANCEMENT.md)** - Advanced RBAC guide
+
+### Frontend Documentation
+- **[UI_ENHANCEMENTS.md](docs/frontend/UI_ENHANCEMENTS.md)** - UI enhancement guide
+
+### Development & Deployment
+- **[API_IMPLEMENTATION.md](docs/API_IMPLEMENTATION.md)** - API documentation
+- **[BEST_PRACTICES.md](docs/BEST_PRACTICES.md)** - Coding best practices
+- **[DEPLOYMENT_GUIDE.md](docs/DEPLOYMENT_GUIDE.md)** - Cloud deployment guide
+- **[ENHANCEMENT_SUGGESTIONS.md](docs/ENHANCEMENT_SUGGESTIONS.md)** - Future enhancements
+- **[SUBMISSION.md](docs/SUBMISSION.md)** - Submission guide
 
 ## Getting Started
 
