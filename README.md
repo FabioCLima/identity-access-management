@@ -116,6 +116,28 @@ The `./frontend` directory contains a complete Ionic frontend with:
 4. Configure frontend Auth0 environment variables
 5. Test the complete stack
 
+## Git Repository
+
+This project is initialized as a git repository and demonstrates the ability to share code on Git.
+
+### Creating a Submission Zip
+
+To create a clean submission zip file that excludes virtual environments, node_modules, and other local files:
+
+```bash
+./create-submission-zip.sh
+```
+
+This will create `coffee-shop-submission.zip` in the parent directory with all project code while excluding:
+- .venv/ virtual environment directory
+- __pycache__/ Python cache files
+- node_modules/ Node.js dependencies
+- *.db database files
+- *.log log files
+- .git/ git directory
+
+All files are already properly configured in `.gitignore`.
+
 ## License
 
 This project is part of the Udacity Full Stack Nanodegree program.
