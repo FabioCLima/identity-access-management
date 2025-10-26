@@ -8,7 +8,10 @@ SQLAlchemy==1.4.41
 
 # Authentication
 python-jose[cryptography]==3.3.0
+
+# Management API setup (optional)
 auth0-python==3.24.1
+requests==2.31.0
 
 # Utilities
 Click==7.1.2
