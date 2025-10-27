@@ -1,0 +1,71 @@
+================================================================================
+                LOGOUT E LOGIN COM USUÁRIO COM PERMISSÕES
+================================================================================
+
+PROBLEMA ATUAL:
+---------------
+Você está logado com Google OAuth → Sem roles → permissions: []
+
+SOLUÇÃO:
+--------
+
+PASSO 1: FAZER LOGOUT
+---------------------
+1. Na página user-page
+2. Clicar em botão "Logout" ou "Sign Out"
+3. Voltar para página de login
+
+PASSO 2: LOGIN COM USUÁRIO CRIADO
+----------------------------------
+1. Clicar em "Login"
+2. Na página de login do Auth0:
+
+OPÇÃO A - Usar Credenciais Diretas:
+------------------------------------
+- Email: barista@coffeeshop.com
+- Password: CoffeeShop2024!
+
+OU
+
+- Email: manager@coffeeshop.com
+- Password: CoffeeShop2024!
+
+OPÇÃO B - Se não Permitir Email/Password:
+-------------------------------------------
+1. Verificar se tem opção "Sign up" ou "Create account"
+2. Criar conta com email barista@coffeeshop.com
+3. Ou configurar Auth0 para permitir email/password
+
+PASSO 3: VERIFICAR JWT TEM PERMISSÕES
+--------------------------------------
+Após login, verificar na página user-page:
+
+JWT deve mostrar:
+"permissions": ["get:drinks", "get:drinks-detail"]
+
+SE LOGADO COMO BARISTA:
+"permissions": ["get:drinks", "get:drinks-detail"]
+
+SE LOGADO COMO MANAGER:
+"permissions": ["get:drinks", "get:drinks-detail", "post:drinks", 
+                "patch:drinks", "delete:drinks"]
+
+================================================================================
+                    SE NÃO CONSEGUIR LOGIN
+================================================================================
+
+PROBLEMA: Auth0 só permite Google OAuth
+-----------------------------------------
+Solução 1 - Adicionar Database Connection:
+1. Auth0 Dashboard → Authentication → Database
+2. Criar/ativar "Username-Password-Authentication"
+3. Configurar aplicação para usar esta connection
+
+Solução 2 - Adicionar Google Account aos Users:
+1. Auth0 Dashboard → User Management → Users
+2. Encontrar usuário barista@coffeeshop.com
+3. Connections → Adicionar "google-oauth2"
+4. Fazer login com Google mas usar esta conta
+
+================================================================================
+

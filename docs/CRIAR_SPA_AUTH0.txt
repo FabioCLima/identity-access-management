@@ -1,0 +1,66 @@
+================================================================================
+                    CRIAR SPA APPLICATION NO AUTH0
+================================================================================
+
+STEPS NO AUTH0 DASHBOARD:
+--------------------------
+
+1. ABRIR: https://manage.auth0.com
+2. APLICATIONS → Applications
+3. BOTÃO: "+ Create Application"
+4. NAME: "Coffee Shop Frontend"
+5. APPLICATION TYPE: Single Page Application
+6. CLICAR: "Create"
+
+CONFIGURAR CALLBACK URLs:
+--------------------------
+Na página da nova Application:
+
+Allowed Callback URLs:
+  http://localhost:8100
+  http://localhost:8100/*
+
+Allowed Logout URLs:
+  http://localhost:8100
+
+Allowed Web Origins:
+  http://localhost:8100
+
+COPIAR CLIENT ID:
+-----------------
+Na página da Application, copiar o:
+Client ID: _______________
+
+ATUALIZAR environment.ts:
+---------------------------
+cd frontend
+code src/environments/environment.ts
+
+Trocar:
+clientId: 'NOVO_CLIENT_ID'
+(do passo "COPIAR CLIENT ID")
+
+REINICIAR FRONTEND:
+--------------------
+cd frontend
+export NODE_OPTIONS=--openssl-legacy-provider
+npx ionic serve
+
+TESTAR:
+-------
+Abrir: http://localhost:8100
+Clicar em Login
+DEVE FUNCIONAR AGORA!
+
+================================================================================
+                          RESUMO
+================================================================================
+
+Você tem 2 Applications:
+1. Machine to Machine (backend)
+2. Single Page Application (frontend) ← CRIAR ESTA
+
+Tentar usar Machine to Machine como SPA = Erro!
+
+================================================================================
+

@@ -1,0 +1,115 @@
+================================================================================
+            CONFIGURAR MACHINE TO MACHINE NO AUTH0 - PASSO A PASSO
+================================================================================
+
+PROBLEMA:
+---------
+Erro: "access_denied", "Unauthorized"
+Causa: M2M não está autorizada para Management API
+
+SOLUÇÃO:
+--------
+
+PASSO 1: ABRIR AUTH0 DASHBOARD
+-------------------------------
+1. Ir: https://manage.auth0.com
+2. Login com suas credenciais
+
+PASSO 2: IR PARA APPLICATIONS
+------------------------------
+1. Sidebar esquerda → "Applications"
+2. Clicar em "Applications"
+3. Procure: "Coffee Shop API (Test Application)"
+4. Clicar nela
+
+PASSO 3: ABRIR TAB "APIs"
+--------------------------
+Na página da application:
+1. Procure o menu de tabs (Settings, Quick Start, APIs, etc)
+2. Clicar em "APIs"
+
+PASSO 4: AUTORIZAR MANAGEMENT API
+---------------------------------
+Na seção "APIs":
+1. Você verá "Authorized APIs"
+2. Deve ter uma lista de APIs (ou vazio)
+3. Clicar em "Authorize" ou botão similar
+4. Selecione "Auth0 Management API"
+
+PASSO 5: SELECIONAR PERMISSÕES
+------------------------------
+Depois de autorizar, você verá checkboxes:
+
+✅ Selecionar TODAS estas permissões:
+- Read:users (ou Read user attributes)
+- Create:users
+- Update:users
+- Delete:users
+- Create:roles
+- Update:roles
+- Delete:roles
+- Read:roles
+- Read:permissions
+- Update:permissions
+- Read:clients (opcional)
+- Read:connections (opcional)
+
+PASSO 6: SALVAR
+---------------
+1. Scroll down
+2. Procurar botão "Update" ou "Save"
+3. Clicar nele
+4. Aguardar mensagem de confirmação
+
+PASSO 7: TESTAR NOVAMENTE
+--------------------------
+Voltar ao terminal:
+
+cd /home/fabiolima/Workdir/udacity_projects/identity-access-management/coffee-shop
+./criar_usuarios.sh
+
+================================================================================
+                    SE NÃO APARECER "AUTHORIZE"
+================================================================================
+
+OPÇÃO A: Configurar Grant Manualmente
+--------------------------------------
+1. Auth0 → Applications
+2. "Coffee Shop API (M2M)"
+3. Settings
+4. Grant Types
+5. Verificar que está marcado: "Machine to Machine"
+6. Save
+
+OPÇÃO B: Criar Nova M2M Application
+-------------------------------------
+Se não funcionar:
+1. Applications → Create Application
+2. Name: "Coffee Shop Management"
+3. Type: Machine to Machine
+4. Criar
+5. Autorizar Management API
+6. Selecionar todas permissions
+7. Update
+8. Copiar Client ID e Secret
+9. Atualizar criar_usuarios.sh com novos valores
+
+================================================================================
+                    VERIFICAÇÃO
+================================================================================
+
+DEPOIS DE CONFIGURAR:
+---------------------
+Acesse: Auth0 → Applications → Coffee Shop API (M2M) → APIs
+
+DEVE MOSTRAR:
+--------------
+Management API
+  [ ] Read users
+  [x] Create users    ← MARCADAS
+  [x] Update users    ← MARCADAS
+  [x] Delete users   ← MARCADAS
+  etc...
+
+================================================================================
+

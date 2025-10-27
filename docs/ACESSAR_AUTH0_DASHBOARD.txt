@@ -1,0 +1,81 @@
+================================================================================
+            COMO ACESSAR E CONFIGURAR NO AUTH0 DASHBOARD
+================================================================================
+
+PASSO 1: ABRIR AUTH0 DASHBOARD
+-------------------------------
+URL: https://manage.auth0.com
+(Abrir no navegador)
+
+PASSO 2: FAZER LOGIN
+---------------------
+- Login com suas credenciais Auth0
+- (Geralmente email e senha, ou Google SSO)
+
+PASSO 3: IR PARA USER MANAGEMENT
+---------------------------------
+Na sidebar ESQUERDA do Dashboard:
+1. Clicar em "User Management"
+2. Clicar em "Users"
+3. Ver lista de usuários
+
+PASSO 4: ATRIBUIR ROLES AOS USUÁRIOS
+-------------------------------------
+
+PARA BARISTA:
+-------------
+1. Procurar: barista@coffeeshop.com
+2. Clicar no usuário
+3. Na página do usuário, procurar tab "Roles"
+4. Clicar em "Roles"
+5. Marcar checkbox: ☑ Barista
+6. Clicar "Assign" ou "Update"
+
+PARA MANAGER:
+-------------
+1. Voltar para Users (User Management → Users)
+2. Procurar: manager@coffeeshop.com
+3. Clicar no usuário
+4. Roles tab
+5. Marcar checkbox: ☑ Manager
+6. Clicar "Assign" ou "Update"
+
+PARA SEU USUÁRIO GOOGLE:
+------------------------
+1. Users
+2. Procurar: "Fabio Lima" (google-oauth2)
+3. Clicar no usuário
+4. Roles tab
+5. Marcar: ☑ Barista E ☑ Manager
+6. Assign
+
+================================================================================
+                    NAVEGAÇÃO COMPLETA
+================================================================================
+
+DASHBOARD HOME:
+    https://manage.auth0.com
+
+USER MANAGEMENT:
+    https://manage.auth0.com/#/users
+
+APLICATIONS:
+    https://manage.auth0.com/#/applications
+
+ROLES:
+    https://manage.auth0.com/#/roles
+
+================================================================================
+                    QUICK ACCESS
+================================================================================
+
+Para editar usuários criados:
+1. https://manage.auth0.com
+2. User Management (sidebar)
+3. Users
+4. Procurar usuário
+5. Clicar
+6. Roles tab
+
+================================================================================
+

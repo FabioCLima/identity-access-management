@@ -5,11 +5,11 @@ This module provides database configuration and models using SQLAlchemy.
 It includes the Drink model and database initialization functions.
 """
 
-import os
-from sqlalchemy import Column, String, Integer
-from flask_sqlalchemy import SQLAlchemy
 import json
+import os
 
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Column, Integer, String
 
 # Database configuration
 DATABASE_FILENAME = "database.db"
@@ -49,10 +49,7 @@ def db_drop_and_create_all():
     db.drop_all()
     db.create_all()
     # Add one demo row for testing
-    drink = Drink(
-        title='water',
-        recipe='[{"name": "water", "color": "blue", "parts": 1}]'
-    )
+    drink = Drink(title="water", recipe='[{"name": "water", "color": "blue", "parts": 1}]')
     drink.insert()
 
 
@@ -87,15 +84,8 @@ class Drink(db.Model):
             {'id': 1, 'title': 'Coffee', 'recipe': [{'color': 'brown', 'parts': 1}]}
         """
         print(json.loads(self.recipe))
-        short_recipe = [
-            {'color': r['color'], 'parts': r['parts']}
-            for r in json.loads(self.recipe)
-        ]
-        return {
-            'id': self.id,
-            'title': self.title,
-            'recipe': short_recipe
-        }
+        short_recipe = [{"color": r["color"], "parts": r["parts"]} for r in json.loads(self.recipe)]
+        return {"id": self.id, "title": self.title, "recipe": short_recipe}
 
     def long(self):
         """
@@ -108,11 +98,7 @@ class Drink(db.Model):
         Example:
             {'id': 1, 'title': 'Coffee', 'recipe': [{'color': 'brown', 'name': 'coffee', 'parts': 1}]}
         """
-        return {
-            'id': self.id,
-            'title': self.title,
-            'recipe': json.loads(self.recipe)
-        }
+        return {"id": self.id, "title": self.title, "recipe": json.loads(self.recipe)}
 
     def insert(self):
         """

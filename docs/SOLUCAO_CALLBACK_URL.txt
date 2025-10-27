@@ -1,0 +1,78 @@
+================================================================================
+                    SOLUÇÃO DEFINITIVA - CALLBACK URL
+================================================================================
+
+PROBLEMA:
+---------
+Callback URL mismatch ainda ocorre.
+
+AÇÃO IMEDIATA:
+--------------
+
+1. ABRIR: https://manage.auth0.com
+2. IR: Applications → Coffee Shop Frontend
+3. SCROLL para "Settings"
+4. PROcurar seção "Application URIs"
+
+ADICIONAR ESTAS 3 LINHAS EM "Allowed Callback URLs":
+-----------------------------------------------------
+http://localhost:8100
+http://localhost:8100/*
+http://localhost:8100/tabs/user-page
+
+CADA URL EM UMA LINHA SEPARADA!
+
+===========================================================
+
+Allowed Logout URLs:
+--------------------
+http://localhost:8100
+
+Allowed Web Origins:
+--------------------
+http://localhost:8100
+
+===========================================================
+
+DEPOIS:
+-------
+1. SCROLL ATÉ O FIM DA PÁGINA
+2. CLICAR EM: "Save Changes" (botão azul)
+3. AGUARDAR: "Settings updated successfully" (mensagem verde)
+4. AGUARDAR: 1 minuto
+5. TESTAR NOVAMENTE
+
+================================================================================
+                    SE NÃO FUNCIONAR
+================================================================================
+
+VERIFICAR NO NAVEGADOR:
+-----------------------
+1. F12 (abrir DevTools)
+2. Console tab
+3. Procurar erro que mostra redirect_uri=...
+4. Copiar URL EXATA
+5. Adicionar essa URL EXATA no Auth0
+
+TESTAR COM OUTRAS URLs:
+-----------------------
+Adicionar também:
+http://localhost:8100/
+http://localhost:8100/home
+http://localhost:8100/callback
+http://localhost:8100/tabs/user-page/
+http://localhost:8100/#access_token=...
+
+================================================================================
+                    CONFIGURAÇÃO FINAL
+================================================================================
+
+Allowed Callback URLs deve conter:
+http://localhost:8100
+http://localhost:8100/*
+http://localhost:8100/tabs/user-page
+
+SE CADA URL ESTÁ EM LINHA SEPARADA = DEVE FUNCIONAR
+
+================================================================================
+

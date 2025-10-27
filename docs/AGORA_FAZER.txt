@@ -1,0 +1,101 @@
+cd================================================================================
+                      O QUE FAZER AGORA - FRONTEND
+================================================================================
+
+✅ VOCÊ JÁ FEZ: npm install (dependências prontas!)
+
+⚠️  FALTA FAZER: Configurar environment.ts e Rodar
+
+================================================================================
+                          PASSO 1: CONFIGURAR
+================================================================================
+
+Editar o arquivo:
+cd frontend
+code src/environments/environment.ts
+
+OU
+
+nano src/environments/environment.ts
+
+
+SUBSTITUIR TODO O CONTEÚDO POR:
+
+export const environment = {
+  production: false,
+  apiServerUrl: 'http://127.0.0.1:5000',
+  auth0: {
+    url: 'dev-huk2wemon6z8ehay',
+    audience: 'coffee-shop-api',
+    clientId: 'GoLpoo1s5t58RaJ6R2XQeiyN3eUUP8QV',
+    callbackURL: 'http://localhost:8100',
+  }
+};
+
+SALVAR O ARQUIVO!
+
+================================================================================
+                          PASSO 2: RODAR
+================================================================================
+
+cd frontend
+export NODE_OPTIONS=--openssl-legacy-provider
+ionic serve
+
+
+AGUARDAR aparecer: "dev server running: http://localhost:8100"
+
+================================================================================
+                          PASSO 3: TESTAR
+================================================================================
+
+Abrir navegador:
+http://localhost:8100
+
+O que deve acontecer:
+1. Página abre sem erros
+2. Aparece botão "Login"
+3. Clicar em "Login" → redireciona para Auth0
+4. Fazer login na Auth0
+5. Volta para o app mostrando drinks
+
+✅ SE DRINKS APARECEM = FRONTEND FUNCIONANDO!
+
+================================================================================
+                          RODAR BACKEND TAMBÉM
+================================================================================
+
+Em outro terminal:
+
+cd backend
+./start_server.sh
+
+
+Backend deve rodar em: http://localhost:5000
+
+================================================================================
+                          RESOLVER VULNERABILIDADES
+================================================================================
+
+Se quiser resolver as vulnerabilidades (opcional):
+
+cd frontend
+npm audit fix
+
+
+Mas para testes, não é obrigatório!
+
+================================================================================
+                    RESUMO: VOCÊ PRECISA FAZER
+================================================================================
+
+1. ✅ Editar: src/environments/environment.ts
+2. ✅ Copiar: O código acima
+3. ✅ Rodar: export NODE_OPTIONS=--openssl-legacy-provider && ionic serve
+4. ✅ Abrir: http://localhost:8100
+5. ✅ Testar: Login e ver drinks
+
+É SÓ ISSO! 🎉
+
+================================================================================
+

@@ -1,0 +1,96 @@
+================================================================================
+                    COMO EXECUTAR O PROJETO COMPLETO
+================================================================================
+
+SÃO 2 SERVIDORES NECESSÁRIOS:
+-----------------------------
+1. Backend (Flask) - porta 5000
+2. Frontend (Ionic) - porta 8100
+
+================================================================================
+                    PASSO 1: INICIAR BACKEND
+================================================================================
+
+TERMINAL 1:
+-----------
+cd /home/fabiolima/Workdir/udacity_projects/identity-access-management/coffee-shop
+cd backend
+./start_server.sh
+
+OU manualmente:
+python -m flask --app src run --debug
+
+DEVE MOSTRAR:
+--------------
+ * Running on http://127.0.0.1:5000
+ * Restarting with stat
+
+TESTAR:
+-------
+Em outro terminal:
+curl http://localhost:5000/drinks
+
+Deve retornar JSON com drinks.
+
+================================================================================
+                    PASSO 2: INICIAR FRONTEND
+================================================================================
+
+TERMINAL 2 (NOVO TERMINAL):
+----------------------------
+cd /home/fabiolima/Workdir/udacity_projects/identity-access-management/coffee-shop
+cd frontend
+
+export NODE_OPTIONS=--openssl-legacy-provider
+npx ionic serve
+
+DEVE MOSTRAR:
+-------------
+ > IONIC_SERVE_LOCAL=true ng serve -- --open
+
+  ** Angular Live Development Server is listening on localhost:8100 **
+  Local: http://localhost:8100
+
+ABRIR NO NAVEGADOR:
+-------------------
+http://localhost:8100
+
+================================================================================
+                    SE FRONTEND NÃO INICIAR
+================================================================================
+
+VERIFICAR SE TEM NODE_MODULES:
+-------------------------------
+cd frontend
+ls node_modules
+
+Se vazio ou erro:
+------------------
+npm install
+
+Depois:
+--------
+export NODE_OPTIONS=--openssl-legacy-provider
+npx ionic serve
+
+================================================================================
+                    RESUMO DOS COMANDOS
+================================================================================
+
+TERMINAL 1 - BACKEND:
+--------------------
+cd backend
+./start_server.sh
+
+TERMINAL 2 - FRONTEND:
+----------------------
+cd frontend
+export NODE_OPTIONS=--openssl-legacy-provider
+npx ionic serve
+
+ABRIR NAVEGADOR:
+----------------
+http://localhost:8100
+
+================================================================================
+

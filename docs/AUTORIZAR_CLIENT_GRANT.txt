@@ -1,0 +1,80 @@
+================================================================================
+                AUTORIZAR CLIENT GRANT - MANAGEMENT API
+================================================================================
+
+ERRO:
+-----
+Client não autorizado para Management API
+Precisa criar um "client-grant"
+
+SOLUÇÃO:
+--------
+
+NO AUTH0 DASHBOARD:
+-------------------
+
+PASSO 1: ABRIR APPLICATIONS
+---------------------------
+1. Auth0 Dashboard → Applications
+2. Procurar: "Coffee Shop API (Test Application)" ou a que tem Client ID Etb0Gtox8...
+3. Clicar nela
+
+PASSO 2: AUTORIZAR MANAGEMENT API
+----------------------------------
+Na página da Application:
+
+OPÇÃO A - Se tem Tab "APIs":
+-----------------------------
+1. Clicar tab "APIs"
+2. Se não tem Management API autorizada:
+   → Clicar em "+ Authorize"
+   → Selecionar "Auth0 Management API"
+   → Salvar
+
+OPÇÃO B - Criar Client Grant Manualmente:
+------------------------------------------
+1. Auth0 Dashboard → Applications → APIs
+2. Clicar "Machine to Machine Applications" tab
+3. Procurar sua M2M application
+4. Clicar em "Authorize" na linha da Management API
+
+PASSO 3: SELECIONAR PERMISSÕES
+-------------------------------
+Após autorizar, marcar TODAS as checkboxes:
+
+☑ Read:users
+☑ Create:users
+☑ Update:users
+☑ Delete:users
+☑ Read:roles
+☑ Create:roles
+☑ Update:roles
+☑ Delete:roles
+☑ Read:permissions
+☑ Update:permissions
+☑ Read:clients (opcional)
+☑ Read:connections (opcional)
+
+PASSO 4: SALVAR
+---------------
+1. Clicar "Save" ou "Update"
+2. Aguardar mensagem de confirmação
+3. Aguardar 30 segundos
+
+PASSO 5: TESTAR SCRIPT
+----------------------
+cd /home/fabiolima/Workdir/udacity_projects/identity-access-management/coffee-shop
+./criar_usuarios.sh
+
+================================================================================
+                    ALTERNATIVA: CRIAR GRANT VIA CURL
+================================================================================
+
+Se a UI não funcionar, criar grant via API:
+
+1. Fazer login no Auth0 Dashboard
+2. Ir para Applications → Machine to Machine Apps
+3. Ver se já existe um grant criado
+
+================================================================================
+

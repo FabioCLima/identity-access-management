@@ -1,0 +1,22 @@
+================================================================================
+                        TECHNOLOGY NO AUTH0
+================================================================================
+
+Ao criar SPA Application, pergunta:
+"Which technology are you using for your project?"
+
+RESPOSTA:
+---------
+Selecionar: "Angular"
+
+(porque o frontend usa Ionic/Angular)
+
+================================================================================
+
+Próximos passos após selecionar Angular:
+1. Copiar o Client ID
+2. Atualizar environment.ts
+3. Reiniciar frontend
+
+================================================================================
+

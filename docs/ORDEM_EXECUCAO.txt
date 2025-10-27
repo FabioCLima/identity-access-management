@@ -1,0 +1,84 @@
+================================================================================
+                    ORDEM DE EXECUÇÃO RECOMENDADA
+================================================================================
+
+PREFERÊNCIA: BACKEND PRIMEIRO
+-------------------------------
+
+Por quê?
+--------
+1. Backend demora mais para iniciar (criar venv, instalar deps, etc)
+2. Frontend inicia rápido
+3. Se iniciar frontend primeiro, pode tentar conectar backend antes dele estar pronto
+4. Backend primeiro = mais fácil debug
+
+ORDEM CORRETA:
+---------------
+
+TERMINAL 1 - BACKEND PRIMEIRO:
+-------------------------------
+cd /home/fabiolima/Workdir/udacity_projects/identity-access-management/coffee-shop
+cd backend
+./start_server.sh
+
+AGUARDAR até ver:
+-----------------
+ * Running on http://127.0.0.1:5000
+ * Restarting with stat
+
+DEPOIS:
+-------
+TERMINAL 2 - FRONTEND:
+----------------------
+cd /home/fabiolima/Workdir/udacity_projects/identity-access-management/coffee-shop
+cd frontend
+export NODE_OPTIONS=--openssl-legacy-provider
+npx ionic serve
+
+================================================================================
+                    SE JÁ INICIOU FRONTEND
+================================================================================
+
+JÁ ESTÁ RODANDO:
+---------------
+Você já iniciou o frontend! ✅
+
+AÇÃO AGORA:
+----------
+1. Abrir novo terminal (nova aba/janela)
+2. Iniciar backend:
+   cd backend && ./start_server.sh
+3. Frontend vai se conectar automaticamente quando backend iniciar
+
+================================================================================
+                    VERIFICAR SE ESTÁ TUDO OK
+================================================================================
+
+TESTAR BACKEND:
+--------------
+curl http://localhost:5000/drinks
+
+Se retornar JSON com drinks = ✅ OK
+
+TESTAR FRONTEND:
+---------------
+Abrir: http://localhost:8100
+
+Se abrir sem erros = ✅ OK
+
+================================================================================
+                    RESUMO
+================================================================================
+
+ORDEM PREFERIDA:
+1. Backend (Terminal 1)
+2. Frontend (Terminal 2)
+
+MAS PODE SER:
+1. Frontend (Terminal 1) ← você já fez
+2. Backend (Terminal 2) ← fazer agora
+
+AMBOS FUNCIONAM! ✅
+
+================================================================================
+

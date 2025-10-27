@@ -1,0 +1,54 @@
+================================================================================
+                    ✅ FORMATO CORRETO - CALLBACK URLs
+================================================================================
+
+FORMATO: LISTA SEPARADA POR VÍRGULAS!
+--------------------------------------
+
+NO CAMPO "Allowed Callback URLs":
+----------------------------------
+http://localhost:8100, http://localhost:8100/*, http://localhost:8100/tabs/user-page
+
+IMPORTANTE:
+-----------
+- Separar URLs por VÍRGULA
+- Espaço após cada vírgula (opcional mas recomendado)
+- NÃO usar enter/newline
+
+EXEMPLO COMPLETO:
+-----------------
+http://localhost:8100, http://localhost:8100/*, http://localhost:8100/tabs/user-page
+
+Ou (sem espaços):
+-----------------
+http://localhost:8100,http://localhost:8100/*,http://localhost:8100/tabs/user-page
+
+================================================================================
+                    PASSOS NO AUTH0
+================================================================================
+
+1. Application: Coffee Shop Frontend
+2. Settings
+3. Allowed Callback URLs:
+   COPIAR E COLAR:
+   
+   http://localhost:8100, http://localhost:8100/*, http://localhost:8100/tabs/user-page
+   
+4. Scroll até fim da página
+5. Save Changes
+6. Aguardar 1 minuto
+7. Testar login
+
+================================================================================
+                    VERIFICAÇÃO
+================================================================================
+
+SE ESTÁ CORRETO:
+----------------
+Allowed Callback URLs: 
+http://localhost:8100, http://localhost:8100/*, http://localhost:8100/tabs/user-page
+
+TODAS AS URLs EM UMA LINHA, SEPARADAS POR VÍRGULAS!
+
+================================================================================
+

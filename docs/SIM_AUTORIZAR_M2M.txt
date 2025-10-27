@@ -1,0 +1,77 @@
+================================================================================
+                SIM! AUTORIZAR MACHINE TO MACHINE
+================================================================================
+
+NO AUTH0 DASHBOARD:
+-------------------
+
+1. Applications → Applications
+2. Procurar e clicar: "Coffee Shop API (Test Application)"
+3. Na página da application, clicar na TAB "APIs"
+
+DEVE MOSTRAR:
+-------------
+┌──────────────────────────────────────┐
+│ Authorized APIs                       │
+├──────────────────────────────────────┤
+│ + Authorize                           │ ← CLICAR AQUI
+└──────────────────────────────────────┘
+
+OU SE JÁ TIVER API AUTORIZADA:
+------------------------------
+┌──────────────────────────────────────┐
+│ Authorized APIs                       │
+├──────────────────────────────────────┤
+│ ☑ Management API                     │
+│   [ ] Read:users                     │
+│   [ ] Create:users                   │
+│   [ ] Update:users                   │
+│   ...                                │
+└──────────────────────────────────────┘
+
+CLICAR EM:
+----------
+Se não tem API autorizada:
+→ "+ Authorize" button
+→ Selecionar "Management API"
+→ Salvar
+
+Se já tem Management API:
+→ Clicar na linha "Management API"
+→ Marcar TODAS as checkboxes de permissions
+→ Save
+
+================================================================================
+                    PERMISSÕES NECESSÁRIAS
+================================================================================
+
+MARQUE TODAS ESTAS:
+-------------------
+☑ Read:users
+☑ Create:users
+☑ Update:users
+☑ Delete:users
+☑ Read:roles
+☑ Create:roles
+☑ Update:roles
+☑ Delete:roles
+☑ Read:permissions
+☑ Update:permissions
+
+(Essencialmente, marcar TODAS as permissões disponíveis)
+
+================================================================================
+                    DEPOIS DE AUTORIZAR
+================================================================================
+
+1. Clicar "Save" ou "Update"
+2. Aguardar mensagem de confirmação
+3. Voltar ao terminal
+
+cd /home/fabiolima/Workdir/udacity_projects/identity-access-management/coffee-shop
+./criar_usuarios.sh
+
+AGORA DEVE FUNCIONAR! ✅
+
+================================================================================
+

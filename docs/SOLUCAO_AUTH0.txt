@@ -1,0 +1,66 @@
+================================================================================
+                    PROBLEMA: DOMÍNIO AUTH0 INVÁLIDO
+================================================================================
+
+ERRO: dev-huk2wemon6z8ehay.auth0.com não existe
+
+================================================================================
+                          SOLUÇÕES
+================================================================================
+
+OPÇÃO 1: VERIFICAR DOMÍNIO CORRETO NO AUTH0
+-------------------------------------------
+1. Login: https://manage.auth0.com
+2. Verificar Applications → Domain
+3. Copiar domínio CORRETO
+4. Atualizar environment.ts e backend/.env
+
+OPÇÃO 2: CRIAR NOVO TENANT AUTH0
+-----------------------------------
+1. Criar conta: https://auth0.com/signup
+2. Criar novo tenant
+3. Criar Application (SPA)
+4. Criar API com RBAC
+5. Copiar Client ID e Domain
+6. Configurar environment.ts
+
+OPÇÃO 3: USAR DOMÍNIO DE TESTE
+-----------------------------------
+Por agora, você pode usar um domínio de teste do Auth0.
+
+================================================================================
+                          COMANDO RÁPIDO
+================================================================================
+
+Editar environment.ts temporariamente:
+
+cd frontend
+code src/environments/environment.ts
+
+Testar com:
+url: 'udacity-fsnd'
+audience: 'dev'
+clientId: '' (vazio para testar)
+
+Mas precisa Auth0 REAL para funcionar completamente!
+
+================================================================================
+                          AÇÃO NECESSÁRIA
+================================================================================
+
+VOCÊ PRECISA:
+1. Acessar https://manage.auth0.com
+2. Ver qual é o domínio CORRETO
+3. Atualizar environment.ts com domínio correto
+4. Atualizar backend/.env com domínio correto
+
+OU
+
+1. Criar novo tenant Auth0
+2. Configurar tudo do zero
+3. Atualizar ambos arquivos
+
+================================================================================
+
+Leia: CORRIGIR_AUTH0.md para instruções detalhadas
+

@@ -1,0 +1,78 @@
+================================================================================
+                    RESOLVER SESSÃO E LOGOUT
+================================================================================
+
+PROBLEMA ATUAL:
+---------------
+1. Logado como barista mas permissions: []
+2. Não consegue fazer logout
+3. Quer testar manager
+
+CAUSA:
+------
+O usuário barista criado NÃO tem role atribuído ainda no Auth0.
+Por isso permissions está vazio.
+
+SOLUÇÃO 1 - FORÇAR LOGOUT VIA Navegador
+----------------------------------------
+1. Abrir DevTools (F12)
+2. Application tab (ou Storage no Firefox)
+3. Local Storage
+4. Procurar e DELETAR:
+   - JWTS_LOCAL_KEY
+   - JWTS_ACTIVE_INDEX_KEY
+5. Recarregar página (F5)
+
+SOLUÇÃO 2 - LIMPAR COOKIES AUTH0
+----------------------------------
+1. DevTools (F12)
+2. Application → Cookies
+3. Localizar cookies do domínio auth0.com
+4. Deletar TODOS
+5. Recarregar página
+
+SOLUÇÃO 3 - MODO ANÔNIMO
+-------------------------
+1. Abrir nova janela anônima
+2. Ir para localhost:8100
+3. Fazer login com manager
+
+ATRIBUIR ROLES NO AUTH0:
+-------------------------
+Antes de testar novamente:
+
+1. Auth0 Dashboard
+2. User Management → Users
+3. Procurar: barista@coffeeshop.com
+4. Clicar no usuário
+5. Roles tab
+6. Marcar ☑ Barista (ou Manager para testar)
+7. Assign
+
+DEPOIS:
+-------
+1. Limpar session (Solução 1 ou 2)
+2. Fazer login novamente
+3. JWT deve ter permissions agora!
+
+ATRIBUIR ROLE AO MANAGER TAMBÉM:
+---------------------------------
+1. Users → manager@coffeeshop.com
+2. Roles tab
+3. Marcar ☑ Manager
+4. Assign
+
+================================================================================
+                    LIMPAR SESSÃO COMPLETA
+================================================================================
+
+MÉTODO MAIS EFICAZ:
+-------------------
+1. Fechar TODOS os tabs do navegador com localhost:8100
+2. Fechar navegador
+3. Abrir navegador novamente
+4. Ir para localhost:8100
+5. Fazer login (deve permitir escolher usuário/Google)
+
+================================================================================
+

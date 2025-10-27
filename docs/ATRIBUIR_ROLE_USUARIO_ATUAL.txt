@@ -1,0 +1,63 @@
+================================================================================
+        ATRIBUIR ROLE AO USUÁRIO ATUAL (Google OAuth)
+================================================================================
+
+SOLUÇÃO MAIS RÁPIDA:
+--------------------
+
+Você não precisa fazer logout. Apenas atribuir role ao usuário atual.
+
+NO AUTH0 DASHBOARD:
+-------------------
+
+PASSO 1: IR PARA USER MANAGEMENT
+---------------------------------
+1. Abrir: https://manage.auth0.com
+2. User Management → Users
+3. Procurar usuário: "Fabio Lima" (google-oauth2)
+4. Clicar no usuário
+
+PASSO 2: ATRIBUIR ROLE
+-----------------------
+1. Na página do usuário, clicar na tab "Roles"
+2. Você verá roles criados: "Barista" e "Manager"
+3. Selecionar checkboxes:
+   ☑ Barista
+   ☑ Manager
+   (ou apenas um, para testar)
+
+4. Clicar "Assign" ou "Update"
+
+PASSO 3: FAZER LOGOUT E LOGIN NOVAMENTE
+----------------------------------------
+No frontend:
+1. Logout
+2. Login novamente (Google OAuth)
+3. Verificar JWT agora tem permissions!
+
+JWT DEVE MOSTRAR:
+-----------------
+"permissions": ["get:drinks", "get:drinks-detail", "post:drinks", 
+                "patch:drinks", "delete:drinks"]
+
+================================================================================
+                    TESTAR PERMISSÕES
+================================================================================
+
+DEPOIS DE LOGIN COM ROLES:
+---------------------------
+
+TESTAR COMO BARISTA:
+- Ver drinks ✅
+- Ver receitas ✅
+- Criar drink ❌ (deve dar erro 403)
+
+TESTAR COMO MANAGER:
+- Ver drinks ✅
+- Ver receitas ✅
+- Criar drink ✅ (deve funcionar!)
+- Editar drink ✅
+- Deletar drink ✅
+
+================================================================================
+

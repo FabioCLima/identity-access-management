@@ -1,0 +1,71 @@
+================================================================================
+                          VERIFICAR CONFIGURAÇÃO AUTH0
+================================================================================
+
+BACKEND .ENV:
+-------------
+AUTH0_DOMAIN=dev-huk2wemon6z8ehay.us.auth0.com
+AUTH0_API_AUDIENCE=coffee-shop-api
+
+FRONTEND ENVIRONMENT.TS:
+-------------------------
+url: 'dev-huk2wemon6z8ehay'
+
+Observação:
+-----------
+Backend tem: .us.auth0.com
+Frontend não tem o sufixo .us
+
+Isso pode ser o problema!
+
+================================================================================
+                          CORREÇÃO NECESSÁRIA
+================================================================================
+
+OPÇÃO 1: Ajustar environment.ts para incluir .us
+-------------------------------------------------
+Editar frontend/src/environments/environment.ts:
+
+url: 'dev-huk2wemon6z8ehay.us'
+
+Mas isso também pode não funcionar porque o domínio pode ser inválido.
+
+================================================================================
+                          VERIFICAR SE DOMÍNIO EXISTE
+================================================================================
+
+TESTE:
+curl https://dev-huk2wemon6z8ehay.us.auth0.com/.well-known/openid-configuration
+
+Se retornar 404 = domínio não existe
+Se retornar JSON = domínio existe
+
+================================================================================
+                          SOLUÇÃO DEFINITIVA
+================================================================================
+
+VOCÊ PRECISA:
+1. Acessar Auth0 dashboard
+2. Verificar SE o tenant existe
+3. Se NÃO existe, criar novo
+4. Se EXISTE, verificar domínio correto
+5. Atualizar .env e environment.ts
+
+================================================================================
+                          AÇÃO IMEDIATA
+================================================================================
+
+1. ABRIR: https://manage.auth0.com
+2. LOGIN com suas credenciais
+3. VER Applications → ver o domínio
+4. COPIAR domínio correto
+5. ATUALIZAR environment.ts
+
+OU
+
+1. CRIAR novo tenant Auth0
+2. SETUP Application e API
+3. CONFIGURAR ambos arquivos
+
+================================================================================
+
